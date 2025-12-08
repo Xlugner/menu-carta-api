@@ -1,22 +1,23 @@
 ---
 // src/components/Header/ContactInfo.astro
-import { contactItems } from '../Navigation/navItems';
-import PhoneIcon from '../Icons/PhoneIcon.astro';
-import DevicePhoneMobileIcon from '../Icons/DevicePhoneMobileIcon.astro';
+import { contactItems } from "../Navigation/navItems";
+import PhoneIcon from "../Icons/PhoneIcon.astro";
+import DevicePhoneMobileIcon from "../Icons/DevicePhoneMobileIcon.astro";
 ---
 
 <div class="hidden lg:flex items-center gap-6">
-  {contactItems.map((item) => {
-    // ícono usar según el tipo
-    const IconComponent = item.type === 'phone' ? PhoneIcon : DevicePhoneMobileIcon;
-    
-    return (
-      <div class="flex items-center gap-2">
-        <IconComponent className="size-5 text-gray-500" />
-        <span class="text-gray-700 font-medium">
-          {item.value}
-        </span>
-      </div>
-    );
-  })}
+  {
+    contactItems.map((item) => {
+      // ícono usar según el tipo
+      const IconComponent =
+        item.type === "phone" ? PhoneIcon : DevicePhoneMobileIcon;
+
+      return (
+        <div class="flex items-center gap-2">
+          <IconComponent className="size-5 text-gray-200" />
+          <span class="text-white font-medium">{item.value}</span>
+        </div>
+      );
+    })
+  }
 </div>
