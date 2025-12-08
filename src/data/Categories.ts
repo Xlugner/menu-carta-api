@@ -1,7 +1,7 @@
  export const defaultCategories = [
   { 
     id: 1, 
-    name: 'Electrónica', 
+    name: 'Electronica', 
     imageUrl: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=400&fit=crop', 
     altText: 'Productos electrónicos', 
     href: '/categoria/electronica' 

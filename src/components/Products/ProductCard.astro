@@ -1,0 +1,35 @@
+---
+import type { Product } from "../../data/Products";
+import ProductImage from "./ProductImage.astro";
+import ProductPrice from "./ProductPrice.astro";
+
+export interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<div
+  class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+>
+  <ProductImage
+    image={product.image}
+    altText={product.altText}
+    name={product.name}
+  />
+
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-gray-900 line-clamp-2 mb-2">
+      {product.name}
+    </h3>
+
+    <p class="text-sm text-gray-600 line-clamp-2 mb-3">
+      {product.description}
+    </p>
+
+    <ProductPrice
+      price={product.price}
+    />
+  </div>
+</div>

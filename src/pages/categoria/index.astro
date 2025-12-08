@@ -1,0 +1,16 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CategoryFilter from "../../components/Products/CategoryFilter.astro";
+import ProductGrid from "../../components/Products/ProductGrid.astro";
+import { products } from "../../data/Products";
+---
+
+<Layout>
+  <CategoryFilter />
+  <main class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <!-- Grid de Productos -->
+      <ProductGrid products={products} />
+    </div>
+  </main>
+</Layout>
