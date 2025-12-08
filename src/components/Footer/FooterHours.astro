@@ -1,23 +1,16 @@
 ---
-export interface Props {
-  openingHours?: {
-    days: string;
-    hours: string;
-  };
-}
 
-const { 
-  openingHours = {
-    days: "Lunes a Viernes",
-    hours: "9:00 - 18:00"
-  }
-} = Astro.props;
+// src/components/Footer/FooterHours.astro
+import { siteConfig } from '../Navigation/navItems';
+
+const days = "Lunes a Viernes";
+const hours = `${siteConfig.schedule.openTime} - ${siteConfig.schedule.closeTime}`;
 ---
 
 <div class="text-center md:text-left">
   <h3 class="text-sm font-semibold text-white mb-2">Horario de Atención</h3>
   <div class="text-gray-300 space-y-1">
-    <p>{openingHours.days}</p>
-    <p>{openingHours.hours}</p>
+    <p>{days}</p>
+    <p>{hours}</p>
   </div>
 </div>
