@@ -1,0 +1,13 @@
+---
+// src/components/Header/StatusBadge.astro
+import { getStatusBadge } from '../../utils/StatusBadgeFunc';
+
+
+const status = getStatusBadge();
+---
+
+<div class="hidden lg:flex items-center">
+  <span class={`px-3 py-1 rounded-full text-sm font-medium ${status.colorClass}`}>
+    {status.text}
+  </span>
+</div>

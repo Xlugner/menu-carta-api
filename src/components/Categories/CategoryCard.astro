@@ -1,0 +1,35 @@
+---
+export interface Props {
+  id: string | number;
+  name: string;
+  imageUrl: string;
+  altText?: string;
+  href?: string;
+}
+
+const { id, name, imageUrl, altText = name, href = "#" } = Astro.props;
+---
+
+<a 
+  href={href} 
+  class="group block transition-all duration-300 hover:scale-[1.02]"
+>
+  <div class="relative overflow-hidden rounded-xl bg-gray-100 aspect-square">
+    <img
+      src={imageUrl}
+      alt={altText}
+      width="400"
+      height="400"
+      class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+      loading="lazy"
+    />
+    {/* Overlay sutil al hover */}
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+  </div>
+  
+  <div class="mt-4 text-center">
+    <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
+      {name}
+    </h3>
+  </div>
+</a>

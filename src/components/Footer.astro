@@ -1,0 +1,27 @@
+---
+import { siteConfig } from './Navigation/navItems';
+import FooterBrand from './Footer/FooterBrand.astro';
+import FooterSocial from './Footer/FooterSocial.astro';
+import FooterHours from './Footer/FooterHours.astro';
+import FooterCopyright from './Footer/FooterCopyright.astro';
+---
+
+<footer class="bg-gray-800 text-white py-12">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+        <div class="space-y-6">
+        <FooterBrand 
+        />
+        </div>
+        <FooterHours />
+        <div class="text-center md:text-left">
+        <FooterSocial 
+            
+        />
+        </div>
+        </div>
+    <!-- Línea separadora -->
+    <div class="border-t border-gray-700 pt-8 mb-8"></div>
+    <FooterCopyright companyName={siteConfig.companyName} />
+    </div>
+</footer>

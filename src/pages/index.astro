@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Categories from '../components/Categories/Categories.astro';
+
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layout>
+	<HeroSection
+  mobileImage="/src/Images/heroimg.webp"
+  desktopImage="/src/Images/heroimg.webp"
+  altText="Imagen principal"
+  className="max-h-[80vh] object-cover"
+/>
+	<Categories
+  title="Nuestras Categorías" />
+</Layout>

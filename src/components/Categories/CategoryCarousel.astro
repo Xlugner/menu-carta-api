@@ -1,0 +1,46 @@
+---
+import CategoryCard from './CategoryCard.astro';
+
+export interface Props {
+  categories: Array<{
+    id: string | number;
+    name: string;
+    imageUrl: string;
+    altText?: string;
+    href?: string;
+  }>;
+}
+
+const { categories } = Astro.props;
+---
+
+<section class="py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="relative">
+      <!-- Contenedor del carrusel -->
+      <div class="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+        {categories.map((category) => (
+          <div class="shrink-0 w-48 snap-start">
+            <CategoryCard
+              id={category.id}
+              name={category.name}
+              imageUrl={category.imageUrl}
+              altText={category.altText}
+              href={category.href}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>

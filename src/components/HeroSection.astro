@@ -1,0 +1,40 @@
+---
+export interface Props {
+  mobileImage: string;
+  desktopImage?: string;
+  altText: string;
+  className?: string;
+}
+
+const { 
+  mobileImage, 
+  desktopImage = mobileImage, 
+  altText, 
+  className = "" 
+} = Astro.props;
+---
+
+<section class={`w-full overflow-hidden ${className}`}>
+  <div class="md:hidden">
+    <img
+      src={mobileImage}
+      alt={altText}
+      width="375"
+      height="667"
+      class="w-full h-auto object-cover"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
+  
+  <div class="hidden md:block">
+    <img
+      src={desktopImage}
+      alt={altText}
+      width="1920"
+      height="1080"
+      class="w-full h-auto object-cover"
+      loading="lazy"
+    />
+  </div>
+</section>

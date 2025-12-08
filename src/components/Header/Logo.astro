@@ -1,0 +1,18 @@
+---
+// src/components/Header/Logo.astro
+import { siteConfig } from '../Navigation/navItems';
+---
+
+<a href="#" class="-m-1.5 p-1.5 flex items-center gap-2 hover:opacity-90 transition-opacity">
+  <!-- Logo -->
+  <img 
+    src={siteConfig.logoUrl} 
+    alt={siteConfig.logoAlt} 
+    class="h-8 w-auto shrink-0" 
+  />
+  
+  <!-- Nombre siempre visible -->
+  <span class="font-bold text-gray-900 text-base sm:text-lg pl-2 sm:pl-0">
+    {siteConfig.companyName}
+  </span>
+</a>

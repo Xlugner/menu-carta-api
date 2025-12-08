@@ -1,0 +1,30 @@
+---
+// src/components/Footer/FooterSocial.astro
+import type { SocialNetwork } from '../../data/socialConfig';
+import { socialNetworks } from '../../data/socialConfig';
+import FacebookIcon from '../Icons/FacebookIcon.astro';
+import InstagramIcon from '../Icons/InstagramIcon.astro';
+
+export interface Props {
+  networks?: SocialNetwork[];
+  className?: string;
+}
+
+const { networks = socialNetworks, className = '' } = Astro.props;
+---
+
+<!-- Añade "justify-center md:justify-start" -->
+<div class={`flex gap-6 justify-center md:justify-start ${className}`}>
+  {networks.map((network) => (
+    <a 
+      href={network.url} 
+      target="_blank" 
+      rel="noopener noreferrer nofollow"
+      aria-label={network.ariaLabel}
+      class="text-gray-300 hover:text-white transition-colors duration-200"
+    >
+      {network.icon === 'facebook' && <FacebookIcon  />}
+      {network.icon === 'instagram' && <InstagramIcon  />}
+    </a>
+  ))}
+</div>

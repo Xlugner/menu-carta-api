@@ -1,0 +1,31 @@
+---
+import CategoryCard from './CategoryCard.astro';
+
+export interface Props {
+  categories: Array<{
+    id: string | number;
+    name: string;
+    imageUrl: string;
+    altText?: string;
+    href?: string;
+  }>;
+}
+
+const { categories } = Astro.props;
+---
+
+<section class="py-12">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {categories.map((category) => (
+        <CategoryCard
+          id={category.id}
+          name={category.name}
+          imageUrl={category.imageUrl}
+          altText={category.altText}
+          href={category.href}
+        />
+      ))}
+    </div>
+  </div>
+</section>

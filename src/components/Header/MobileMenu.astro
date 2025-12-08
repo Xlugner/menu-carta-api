@@ -1,0 +1,76 @@
+---
+// src/components/Header/MobileMenu.astro
+import { contactItems, siteConfig } from '../Navigation/navItems';
+import { getStatusBadge } from '../../utils/StatusBadgeFunc';
+import CloseIcon from '../Icons/CloseIcon.astro';
+import PhoneIcon from '../Icons/PhoneIcon.astro';
+import DevicePhoneMobileIcon from '../Icons/DevicePhoneMobileIcon.astro';
+
+const status = getStatusBadge();
+---
+
+<el-dialog>
+  <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
+    <div tabindex="0" class="fixed inset-0 focus:outline-none">
+      <el-dialog-panel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <!-- Encabezado del menú móvil -->
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5 flex items-center gap-3">
+            <img 
+              src={siteConfig.logoUrl} 
+              alt={siteConfig.logoAlt} 
+              class="h-8 w-auto" 
+            />
+            <span class="font-bold text-gray-900">
+              {siteConfig.companyName}
+            </span>
+          </a>
+          <button 
+            type="button" 
+            command="close" 
+            commandfor="mobile-menu" 
+            class="-m-2.5 rounded-md p-2.5 text-gray-700 hover:bg-gray-100"
+          >
+            <span class="sr-only">Cerrar menú</span>
+            <CloseIcon/>
+          </button>
+        </div>
+        
+        <!-- Información de contacto en móvil -->
+        <div class="mt-6 flow-root">
+          <div class="space-y-4 py-6">
+            <!-- Teléfonos con íconos -->
+            {contactItems.map((item) => {
+              const IconComponent = item.type === 'phone' ? PhoneIcon : DevicePhoneMobileIcon;
+              
+              return (
+                <div class="-mx-3 rounded-lg px-3 py-3 hover:bg-gray-50">
+                  <div class="flex items-center gap-3">
+                    <IconComponent className="size-5 text-gray-500" />
+                    <div class="flex flex-col">
+                      <span class="text-sm text-gray-500">
+                        {item.label}
+                      </span>
+                      <span class="text-base font-semibold text-gray-900">
+                        {item.value}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            
+            <!-- Estado (Badge) -->
+            <div class="-mx-3 rounded-lg px-3 py-3">
+              <div class="flex items-center justify-between">
+                <span class={`px-3 py-1 rounded-full text-sm font-medium ${status.colorClass}`}>
+                  {status.text}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </el-dialog-panel>
+    </div>
+  </dialog>
+</el-dialog>
