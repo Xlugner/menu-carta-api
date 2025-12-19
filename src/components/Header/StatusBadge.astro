@@ -1,9 +1,12 @@
 ---
 // src/components/Header/StatusBadge.astro
-import { getStatusBadge } from '../../utils/StatusBadgeFunc';
+//import { getStatusBadge } from '../../utils/StatusBadgeFunc';
+import { BusinessService} from '../../services/business.service';
+import { isBusinessOpen, getStatusBadge } from '../../utils/businessStatusBadge';
 
-
-const status = getStatusBadge();
+const business = await BusinessService.getById(1);
+const isOpen = isBusinessOpen(business);
+const status = getStatusBadge(isOpen);
 ---
 
 <div class="hidden lg:flex items-center">

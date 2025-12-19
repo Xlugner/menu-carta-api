@@ -5,8 +5,10 @@ import { getStatusBadge } from '../../utils/StatusBadgeFunc';
 import CloseIcon from '../Icons/CloseIcon.astro';
 import PhoneIcon from '../Icons/PhoneIcon.astro';
 import DevicePhoneMobileIcon from '../Icons/DevicePhoneMobileIcon.astro';
+import { BusinessService } from '../../services/business.service';
 
 const status = getStatusBadge();
+const business = await BusinessService.getById(1);
 ---
 
 <el-dialog>
@@ -17,12 +19,12 @@ const status = getStatusBadge();
         <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5 flex items-center gap-3">
             <img 
-              src={siteConfig.logoUrl} 
-              alt={siteConfig.logoAlt} 
+              src={business?.image} 
+              alt={business?.name} 
               class="h-8 w-auto" 
             />
             <span class="font-bold text-gray-900">
-              {siteConfig.companyName}
+              {business?.name}
             </span>
           </a>
           <button 
@@ -40,25 +42,27 @@ const status = getStatusBadge();
         <div class="mt-6 flow-root">
           <div class="space-y-4 py-6">
             <!-- Teléfonos con íconos -->
-            {contactItems.map((item) => {
-              const IconComponent = item.type === 'phone' ? PhoneIcon : DevicePhoneMobileIcon;
-              
-              return (
                 <div class="-mx-3 rounded-lg px-3 py-3 hover:bg-gray-50">
                   <div class="flex items-center gap-3">
-                    <IconComponent className="size-5 text-gray-500" />
                     <div class="flex flex-col">
+                      <PhoneIcon className="size-5 text-gray-500" />
                       <span class="text-sm text-gray-500">
-                        {item.label}
+                        Teléfono
                       </span>
                       <span class="text-base font-semibold text-gray-900">
-                        {item.value}
+                        {business?.phone}
+                        </span>
+                    <div class="flex flex-col my-0.5">
+                      <DevicePhoneMobileIcon className="size-5 text-gray-500" />
+                      <span class="text-sm text-gray-500">
+                        Móvil
+                      </span>
+                      <span class="text-base font-semibold text-gray-900">
+                        {business?.mobile}
                       </span>
                     </div>
                   </div>
                 </div>
-              );
-            })}
             
             <!-- Estado (Badge) -->
             <div class="-mx-3 rounded-lg px-3 py-3">

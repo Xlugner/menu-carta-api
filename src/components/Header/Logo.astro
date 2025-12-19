@@ -1,6 +1,9 @@
 ---
 // src/components/Header/Logo.astro
 import { siteConfig } from "../Navigation/navItems";
+import { BusinessService } from "../../services/business.service";
+
+const business = await BusinessService.getById(1);
 ---
 
 <a
@@ -9,13 +12,13 @@ import { siteConfig } from "../Navigation/navItems";
 >
   <!-- Logo -->
   <img
-    src={siteConfig.logoUrl}
+    src={business?.image}
     alt={siteConfig.logoAlt}
     class="h-8 w-auto shrink-0"
   />
 
   <!-- Nombre siempre visible -->
   <span class="font-bold text-white text-base sm:text-lg pl-2 sm:pl-0">
-    {siteConfig.companyName}
+    {business?.name}
   </span>
 </a>

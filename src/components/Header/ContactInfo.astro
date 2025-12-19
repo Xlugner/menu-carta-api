@@ -3,21 +3,16 @@
 import { contactItems } from "../Navigation/navItems";
 import PhoneIcon from "../Icons/PhoneIcon.astro";
 import DevicePhoneMobileIcon from "../Icons/DevicePhoneMobileIcon.astro";
+import { BusinessService } from "../../services/business.service";
+
+const business = await BusinessService.getById(1);
 ---
 
 <div class="hidden lg:flex items-center gap-6">
-  {
-    contactItems.map((item) => {
-      // ícono usar según el tipo
-      const IconComponent =
-        item.type === "phone" ? PhoneIcon : DevicePhoneMobileIcon;
-
-      return (
         <div class="flex items-center gap-2">
-          <IconComponent className="size-5 text-gray-200" />
-          <span class="text-white font-medium">{item.value}</span>
+          <PhoneIcon className="size-5 text-white" />
+          <span class="text-white font-medium">{business?.mobile}</span>
+          <DevicePhoneMobileIcon className="size-5 text-white"  />
+          <span class="text-white font-medium">{business?.phone}</span>
         </div>
-      );
-    })
-  }
 </div>

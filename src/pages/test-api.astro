@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { BusinessService } from "../services/business.service";
+import { MenuService } from "../services/menu.service";
+
+// Probar business
+const business = await BusinessService.getById(1);
+
+// Probar obtener todos los menús
+const menus = await MenuService.getAll();
+
+---
+
+<Layout>
+  <div class="max-w-4xl mx-auto p-8">
+    <h1 class="text-3xl font-bold text-white mb-8">🔍 API Test - Menús y Negocio</h1>
+
+    <!-- Business -->
+    {business && (
+      <div class="bg-white/10 p-6 rounded-lg mb-6">
+        <h2 class="text-xl text-white mb-4">📋 Información del Negocio (ID: 1)</h2>
+        <div class="bg-black/30 p-4 rounded">
+          <p class="text-white"><strong>Nombre:</strong> {business.name}</p>
+          <p class="text-white"><strong>Email:</strong> {business.email}</p>
+          <p class="text-white"><strong>Teléfono:</strong> {business.phone}</p>
+          <p class="text-white"><strong>Dirección:</strong> {business.address}</p>
+          <p class="text-white"><strong>Slogan:</strong> {business.slogan}</p>
+          {business.image && (
+            <img src={business.image} alt={business.name} class="mt-2 h-16 rounded" />
+          )}
+          <div class="mt-2 text-sm text-gray-300">
+            <strong>Ubicaciones:</strong> {business.locations?.length || 0}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Menús -->
+    {menus && (
+      <div class="bg-white/10 p-6 rounded-lg mb-6">
+        <h2 class="text-xl text-white mb-4">📱 Menús Disponibles ({menus.length})</h2>
+        {menus.map((menu) => (
+          <div class="bg-black/30 p-4 rounded mb-2">
+            <h3 class="text-white font-bold">ID: {menu.id} - {menu.name}</h3>
+            <p class="text-sm text-gray-300">
+              <strong>Categorías:</strong> {menu.categories?.length || 0}
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <!-- Error Messages -->
+    {!business && !menus && (
+      <div class="bg-red-900/20 p-6 rounded-lg">
+        <h2 class="text-xl text-red-300 mb-4">❌ Error</h2>
+        <p class="text-white">No se pudo obtener información de la API</p>
+      </div>
+    )}
+  </div>
+</Layout>
