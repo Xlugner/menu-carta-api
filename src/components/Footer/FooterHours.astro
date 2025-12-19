@@ -1,16 +1,31 @@
 ---
+import { BusinessService } from '../../services/business.service';
 
-// src/components/Footer/FooterHours.astro
-import { siteConfig } from '../Navigation/navItems';
-
-const days = "Lunes a Viernes";
-const hours = `${siteConfig.schedule.openTime} - ${siteConfig.schedule.closeTime}`;
+// 1.datos desde la API
+const business = await BusinessService.getById(1);
+const workingHours = business?.working_hours || [];
 ---
 
 <div class="text-center md:text-left">
   <h3 class="text-sm font-semibold text-white mb-2">Horario de Atención</h3>
-  <div class="text-gray-300 space-y-1">
-    <p>{days}</p>
-    <p>{hours}</p>
+  <div class="text-gray-300 space-y-2"> 
+    {workingHours.length > 0 ? (
+      workingHours.map(day => (
+        <div class="text-sm">
+          <p class="font-medium">{day.large_day_name}:</p>
+          <div class="pl-4"> 
+            {day.schedules.length > 0 ? (
+              day.schedules.map(schedule => (
+                <p>{schedule.from_hour} - {schedule.to_hour}</p>
+              ))
+            ) : (
+              <p>Cerrado</p>
+            )}
+          </div>
+        </div>
+      ))
+    ) : (
+      <p>Horarios no disponibles.</p>
+    )}
   </div>
 </div>

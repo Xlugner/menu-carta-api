@@ -1,7 +1,10 @@
 ---
 import { siteConfig } from '../Navigation/navItems';
+import { BusinessService } from '../../services/business.service';
+
+const business = await BusinessService.getById(1);
 ---
 
 <div class="text-center text-gray-400 text-sm">
-  <p>© {new Date().getFullYear()} {siteConfig.companyName}. Todos los derechos reservados.</p>
+  <p>© {new Date().getFullYear()} {business?.name}. Todos los derechos reservados.</p>
 </div>

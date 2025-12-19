@@ -1,21 +1,31 @@
 ---
 // src/components/Footer/FooterSocial.astro
-import type { SocialNetwork } from '../../data/socialConfig';
-import { socialNetworks } from '../../data/socialConfig';
 import FacebookIcon from '../Icons/FacebookIcon.astro';
 import InstagramIcon from '../Icons/InstagramIcon.astro';
+import { BusinessService } from '../../services/business.service';
 
-export interface Props {
-  networks?: SocialNetwork[];
-  className?: string;
+const business = await BusinessService.getById(1);
+const socialNetwork = [];
+// Facebook
+if (business?.urlFacebook) {
+  socialNetwork.push({
+    url: business.urlFacebook,
+    icon: 'facebook',
+    ariaLabel: 'Visita nuestro Facebook'
+  });
 }
-
-const { networks = socialNetworks, className = '' } = Astro.props;
+// Instagram
+if (business?.urlInstagram) {
+  socialNetwork.push({
+    url: business.urlInstagram,
+    icon: 'instagram',
+    ariaLabel: 'Visita nuestro Instagram'
+  });
+}
 ---
 
-<!-- Añade "justify-center md:justify-start" -->
-<div class={`flex gap-6 justify-center md:justify-start ${className}`}>
-  {networks.map((network) => (
+<div class=flex gap-6 justify-center md:justify-start>
+  {socialNetwork.map((network) => (
     <a 
       href={network.url} 
       target="_blank" 

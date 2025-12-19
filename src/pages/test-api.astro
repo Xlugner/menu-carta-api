@@ -25,6 +25,21 @@ const menus = await MenuService.getAll();
           <p class="text-white"><strong>Teléfono:</strong> {business.phone}</p>
           <p class="text-white"><strong>Dirección:</strong> {business.address}</p>
           <p class="text-white"><strong>Slogan:</strong> {business.slogan}</p>
+          <div class="text-white">
+            <strong>Horario:</strong> 
+            <ul class="list-disc  list-inside ml-4 mt-2">
+              {business.working_hours.map(day =>(
+                <li>
+                  {day.large_day_name}:
+                  <ul class="list-disc list-inside ml-6">
+                    {day.schedules.map(schedule =>(
+                      <li>{schedule.from_hour} - {schedule.to_hour}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
           {business.image && (
             <img src={business.image} alt={business.name} class="mt-2 h-16 rounded" />
           )}
